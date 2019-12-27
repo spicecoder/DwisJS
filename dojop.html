@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>dojo start</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  
+  <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.3/dojo/dojo.js" data-dojo-config="async: true"></script>
+ <script> dojo.ready(function(){
+    dojo.query("#showMe").onclick(function(e){
+        var node = e.target;
+
+        var a = dojo.anim(node, {
+            backgroundColor: "#363636",
+            color: "#f7f7f7"
+        }, 1000);
+
+        dojo.connect(a, "onEnd", function(){
+            dojo.anim(node, { color: "#363636" }, null, null, function(){
+                node.innerHTML = "wow, that was easy!";
+                dojo.anim(node, { color: "white" });
+            });
+        });
+    });
+});
+  </script>
+  
+</head>
+ <div id="showMe" style="padding: 10px;">
+    click here to see how it works
+</div>
+</body>
+</html>

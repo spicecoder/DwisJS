@@ -1,0 +1,168 @@
+
+[class*='btn-'] {
+	/*Code goes here*/
+}
+		
+Next we're going to add some basic CSS styling to the button. We want to set the basic text sizes, family and colour (but you may already be doing this elsewhere). By setting the element to display inline-block, we can use padding, line height and other block based styles without needing to define a width.
+
+[class*='btn-'] {
+	color: #fff;
+	display: inline-block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+		
+Now we want to add some better styling to our element. Nowadays buttons tend to have rounded corners so for this we'll use border-radius.
+
+border-radius: 4px;
+		
+CSS allows you to specify multiple styles for the same element, a good example of this is using multiple shadows on an element. What we want to do is add a nice shine to the top of the button and a drop shadow below. With any of these new styles you may wish to add browser specific fallbacks. Below is an example of how to do this for box-shadow:
+
+-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+		
+We also want to add a small shadow to the text through the use of text-shadow. In this example and the previous you'll notice the use of "rgba", this specifies the colour along with the "alpha" (opacity).
+
+text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+		
+Finally we want to add a nice transition for when we use different selectors. This isn't currently supported by all browsers but it's slowly getting there.
+
+-webkit-transition: background-color 0.1s linear;
+-moz-transition: background-color 0.1s linear;
+-o-transition: background-color 0.1s linear;
+  transition: background-color 0.1s linear;	
+		
+Your final button CSS style should look like this:
+
+[class*='btn-'] {
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+	  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+	color: #fff;
+	display: inline-block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding: 8px 16px;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+	
+	-webkit-transition: background-color 0.1s linear;
+	-moz-transition: background-color 0.1s linear;
+	-o-transition: background-color 0.1s linear;
+	  transition: background-color 0.1s linear;	
+}
+		
+Creating different buttons
+With the basic button style locked down we need to go about creating the buttons themselves, this process is very simple and just requires a keen eye for design and a theme in mind.
+
+First off we want to create our primary button, this will be the one you use most on the site. For my example I'm creating a purple button but you can easily change the colours. With my colour definitions I'm using the rgb scale but if you prefer you can use standard Hex definitions. When naming your class you want to make sure you start it with "btn-", this is to make the default button style kick in.
+
+.btn-primary {
+	background-color: rgb( 74, 61, 117 );
+	border: 1px solid rgb( 44, 37, 59 );
+}
+		
+Now we have a nice purple button we should add a hover style so people know the button is active. In my example I've made the button fade into a nice lighter shade of purple. To achieve this you want to use the :hover pseudo-element.
+
+.btn-primary:hover {
+	background-color: rgb( 92, 76, 131 );	
+}
+		
+Finally, we want to make it so when the button is clicked the user can see that's happening. Again we want to use a pseudo-element, but this time we need to use :active.
+
+.btn-primary:active {
+	background-color: rgb( 54, 44, 87 );	
+}
+		
+Conclusion
+That completes the basics for creating some nice CSS 3 buttons with CSS transitions, rounded corners and box/text shadows. If you want to create more buttons with a variety of colours then keep using the "btn-" prefix on your class names.
+
+Attached is my full example with 4 different buttons and the HTML to accompany it.
+HTML:
+
+<a href="#" class="btn-blue">Blue button</a>
+<a href="#" class="btn-primary">Primary button</a>
+<a href="#" class="btn-red">Red button</a>
+<a href="#" class="btn-green">Green button</a>
+		
+CSS:
+
+[class*='btn-'] {
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+	  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+	color: #fff;
+	display: inline-block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding: 8px 16px;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+	
+	-webkit-transition: background-color 0.1s linear;
+	-moz-transition: background-color 0.1s linear;
+	-o-transition: background-color 0.1s linear;
+	  transition: background-color 0.1s linear;	
+}
+
+	[class*='btn-']:hover {
+		cursor: pointer;
+	}
+
+	.btn-blue {
+		background-color: rgb( 51, 102, 204 );
+		border: 1px solid rgb( 44, 91, 104 );	
+	}
+	
+		.btn-blue:hover {
+			background-color: rgb( 58, 131, 213 );	
+		}
+		
+		.btn-blue:active {
+			background-color: rgb( 42, 91, 191 );	
+		}
+		
+	.btn-primary {
+		background-color: rgb( 74, 61, 117 );
+		border: 1px solid rgb( 44, 37, 59 );
+	}
+	
+		.btn-primary:hover {
+			background-color: rgb( 92, 76, 131 );	
+		}
+		
+		.btn-primary:active {
+			background-color: rgb( 54, 44, 87 );	
+		}
+	
+	.btn-red {
+		background-color: rgb( 207, 56, 91 );
+		border: 1px solid rgb( 187, 40, 74 );
+	}
+	
+		.btn-red:hover {
+			background-color: rgb( 227, 77, 130 );
+		}
+		
+		.btn-red:active {
+			background-color: rgb( 187, 40, 74 );
+		}
+	
+	.btn-green {
+		background-color: rgb( 43, 153, 91 );
+		border: 1px solid rgb( 33, 126, 74 );
+	}
+	
+		.btn-green:hover {
+			background-color: rgb( 75, 183, 141 );
+		}
+		
+		.btn-green:active {
+			background-color: rgb( 33, 126, 74 );
+		}
+		

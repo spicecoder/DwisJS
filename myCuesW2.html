@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+ 
+<head>
+
+  <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+	<script   src="wwwCuelibSit.js"> </script>
+  <style type="text/css">
+  
+  .goodresult {background:#0000ff }
+  .badresult { background: #fef4cf;width: 180px;  }
+
+	
+  </style>
+  
+  
+
+</head>
+<body style="font-size:100%;">
+ 
+<p>
+<h3> Put Words In My Dictionary </h3>
+<div id="forTable" >
+
+<textarea style="width: 800px; height: 35px;"   id="myWords"  > Comma Seperated W o r d s </textarea></span> 
+<p>
+<button onclick="addDict();"> ADD Words To Dictionary </button>
+<p>
+<h3> Put Words In A Cue </h3>
+<p>Select Word As A Que </p>
+
+<div> 
+<div id='wordselect'   '  > 
+<select id="wordascue">
+ 
+    
+</select>
+</div>
+<p>Select Word  for the Cue: </p>
+<div id="cueselect"   >  
+ 
+<select id="cueword">
+    
+</select>
+<button onclick="putinCue();"> Put Word in Cue </button>
+ </div>
+ 
+ </div>
+ <p>Select  Que </p>
+ 
+  <select id="cuesel">
+    
+</select>
+ </div>
+ 
+ <button onclick="listCue();"> Elements In   Selected Cue </button> // if election is not a cue then nothing listed
+ <button onclick="flowCue();"> Flow with  Selected Cue </button> //if selection is not cue or if a cue doe not have any element - no flo
+ <div id ="result"> Result </div>
+ </div>
+  <p>Select  Word </p>
+ 
+  <select id="wrdsel">
+    
+</select>
+ </div>
+ 
+ <button onclick="intCue();">  Cue words participates In </button> // if election is not a cue then nothing listed
+  
+ <div id ="result"> Result </div>
+ </div>
+ <script type='text/javascript'>
+ /**************************DOCUMENT READY  *****************************************************************/
+ 
+ var selectaword = "";
+  var selectacue = "";
+ function addDict() { 
+ if (typeof(W) === 'undefined' )
+ {var W = new WWW(); }
+ //get words ,comma sperated into array; add each to dictionary
+ var txtv = $('#myWords').val() ;
+ var temp = new Array();
+ temp = txtv.split(",");
+ alert ("here" + temp[0] + ":"+ temp.length);
+ for (var jj = 0 ; jj < temp.length ; jj ++ ) {  
+ W.placeCue(temp[jj])  ; 
+  selectacue = selectacue + '<option value="'+'root.'+temp[jj]+'">'+'root.'+temp[jj]+'</option>';
+  selectaword = selectaword + '<option value="'+temp[jj]+'">'+temp[jj]+'</option>';
+ 
+ }
+ //alert (W.metaWords.words);
+ $("#wordascue").append(selectacue);
+ $("#cuesel").append(selectacue);
+ $("#cueword").append(selectaword);
+ $("#wrdsel").append(selectaword);
+ } 
+ function putincue() {
+var selfc = $("#cueselect option:selected").text();
+alert ("selected cue:" + selfc);
+
+ }
+ 
+  function iterateO(obj) {
+    for (var property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            if (typeof obj[property] == "object")
+                iterateO(obj[property]);
+            else
+                console.log(property + "   " + obj[property]);
+				$("#ObjectProp").append("<p>" + property + "   " + obj[property] +"</p>");
+        }
+    }
+  }
+  function noCueProperties(acue) {
+  var  exproperty  = new Object();
+  exproperty.cueName = "cuName";
+    for (var property in acue) {
+	 alert ("with :" + property);
+        // if (exproperty.hasOwnProperty(property)) {
+            if  (property in  exproperty){ alert ("property   in cue :" + property) ;   }
+                
+   // }
+  } }
+  $(document).ready(function() {
+  
+ 
+
+
+} );
+</script>
+
+ 
+ 
+
+</body>
+
+</html>

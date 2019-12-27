@@ -1,0 +1,3 @@
+body { color: black; }
+div.magnifiable { color: red; }
+div.magnifiable:hover { font-size: 200%; }

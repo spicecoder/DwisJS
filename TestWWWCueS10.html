@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+ 
+<head>
+
+  <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+	<script   src="wwwCuelib.js"> </script>
+  <style type="text/css">
+  
+  .goodresult {background:#0000ff }
+  .badresult { background: #fef4cf;width: 180px;  }
+
+	
+  </style>
+  
+  
+
+</head>
+<body style="font-size:100%;">
+ 
+<p>
+
+<div id="TestStatus"  style="text-align:left; width : 50px">
+ </div>
+<div id="TestResult"  style="text-align:center; " "> </div>
+<div id="unitTest" >
+ </div>
+ <p> Object Properties </p>
+ <div id="ObjectProp" >
+ </div>
+ <script type='text/javascript'>
+ /**************************DOCUMENT READY  *****************************************************************/
+  function iterateO(obj) {
+    for (var property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            if (typeof obj[property] == "object")
+                iterateO(obj[property]);
+            else
+                console.log(property + "   " + obj[property]);
+				$("#ObjectProp").append("<p>" + property + "   " + obj[property] +"</p>");
+        }
+    }
+  }
+  function noCueProperties(acue) {
+  var  exproperty  = new Object();
+  exproperty.cueName = "cuName";
+    for (var property in acue) {
+	 alert ("with :" + property);
+        // if (exproperty.hasOwnProperty(property)) {
+            if  (property in  exproperty){ alert ("property   in cue :" + property) ;   }
+                
+   // }
+  } }
+  $(document).ready(function() {
+ var W = new WWW("noJones");
+ 
+  // prep for test case 0
+ var tn = 0;
+  var statent = "<div id='ts"+ tn  + "'    style='text-align:left; width : 50px' > </div>"
+  var testent = "<div id='tr" + tn  + "'    style='text-align:center'   > </div>"
+ //W.addEntry(W.metaWords  
+ //created with custom root name 
+ $("#unitTest").append(statent);
+ $("#unitTest").append(testent);
+ var  ut = "#ts" + tn;
+ var  ur = "#tr" + tn;
+ 
+ //test case 0
+ 
+ if(W.droot.cuepath === "noJones") {$(ut).css('background-color', 'blue');
+ $(ut).append("Goodoo" ) ;}
+  else {$(ut).css('background-color', 'red');$(ut).html("NotOk" ) ; } 
+ $(ur).append("New W created root:"  + noJones.droot.cuename) ; 
+ //$("#TestResult").html("New W createdres    root:"  + noJones.droot.cuename) ; 
+ 
+//end test case 0
+// prep for test case 2
+ var tn = 1;
+  var statent = "<div id='ts"+ tn  + "'    style='text-align:left; width : 50px' > </div>"
+  var testent = "<div id='tr" + tn  + "'    style='text-align:center'   > </div>"
+ //W.addEntry(W.metaWords  
+ //created with custom root name 
+ $("#unitTest").append(statent);
+ $("#unitTest").append(testent);
+ var  ut = "#ts" + tn;
+ var  ur = "#tr" + tn;
+
+
+ //test case 2
+ 
+ if(W.droot.cuepath === "nxJones") {$(ut).css('background-color', 'blue');
+ $(ut).append("Goodoo" ) ;}
+  else {$(ut).css('background-color', 'red');$(ut).html("NotOk" ) ; } 
+ $(ur).append("New W created root:"  + noJones.droot.cuename) ; 
+ //$("#TestResult").html("New W createdres    root:"  + noJones.droot.cuename) ; 
+ 
+//end test case 2
+//test case 3
+// W.addWord("hello"); // W.hello accessible as word added and hello added to metaWords
+// prep for test case 3
+ var tn = 2;
+  var statent = "<div id='ts"+ tn  + "'    style='text-align:left; width : 50px' > </div>"
+  var testent = "<div id='tr" + tn  + "'    style='text-align:center'   > </div>"
+ //W.addEntry(W.metaWords  
+ //created with custom root name 
+ $("#unitTest").append(statent);
+ $("#unitTest").append(testent);
+ var  ut = "#ts" + tn;
+ var  ur = "#tr" + tn;
+
+
+ //test case 3 
+W.CollectWord("hello","first greetings"); 
+ if(W.metaWords.words[0] === "hello") {$(ut).css('background-color', 'blue');
+ $(ut).append("Goodoo" ) ;}
+  else {$(ut).css('background-color', 'red');$(ut).html("NotOk" ) ; } 
+ $(ur).append("Word Collected:"  + noJones.metaWords.words[0]) ; 
+ //$("#TestResult").html("New W created " +noJones.droot.metaWords.words[0]  ) ; 
+ 
+//end test case 3
+// prep for test case 4
+ var tn = 3;
+  var statent = "<div id='ts"+ tn  + "'    style='text-align:left; width : 50px' > </div>"
+  var testent = "<div id='tr" + tn  + "'    style='text-align:center'   > </div>"
+ //W.addEntry(W.metaWords  
+ //created with custom root name 
+ $("#unitTest").append(statent);
+ $("#unitTest").append(testent);
+ var  ut = "#ts" + tn;
+ var  ur = "#tr" + tn;
+
+//test case 4
+W.CollectWord("morning" ); 
+ if(W.metaWords.words[1] === "morning") {$(ut).css('background-color', 'blue');
+ $(ut).append("Good morning" ) ;}
+   else {$(ut).css('background-color', 'red');$(ut).html("NotOk" ) ; } 
+ $(ur).append("Word Collected:"  + noJones.metaWords.words[1]) ; 
+ //$("#TestResult").html("New W created " +noJones.droot.metaWords.words[0]  ) ; 
+ 
+//end test case 4
+// prep for test case 5
+ var tn = 4;
+  var statent = "<div id='ts"+ tn  + "'    style='text-align:left; width : 50px' > </div>"
+  var testent = "<div id='tr" + tn  + "'    style='text-align:center'   > </div>"
+ //W.addEntry(W.metaWords  
+ //created with custom root name 
+ $("#unitTest").append(statent);
+ $("#unitTest").append(testent);
+ var  ut = "#ts" + tn;
+ var  ur = "#tr" + tn;
+
+//test case 5placeCue
+noJones.placeCue("hello" ); 
+
+ 
+alert ("no jone   alert "  + W.noJones.cuepath   );
+alert ("no jone 2 alert "  + W.noJones.hello.cuepath );
+ if(noJones.noJones.hello.cuepath ===  noJones.droot.cuepath +"hello") {$(ut).css('background-color', 'blue');
+ $(ut).append("cued hello" ) ;}
+   else {$(ut).css('background-color', 'red');$(ut).html("NotOk" ) ; } 
+ $(ur).append("Word to be cued to:"  + noJones.droot.cuepath) ; 
+ //$("#TestResult").html("New W created " +noJones.droot.metaWords.words[0]  ) ; 
+ 
+//end test case 5
+
+//test case ends */
+// iterateO(noJones);
+// 
+} );
+</script>
+
+ 
+ 
+
+</body>
+
+</html>

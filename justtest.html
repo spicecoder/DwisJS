@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+ 
+<head>
+
+  <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+	<script   src="wwwCuelib.js"> </script>
+  <style type="text/css">
+  
+  .goodresult {background:#0000ff }
+  .badresult { background: #fef4cf;width: 180px;  }
+
+	
+  </style>
+  
+  
+
+</head>
+<body style="font-size:100%;">
+ 
+<p>
+
+<div id="TestStatus"  style="text-align:left; width : 50px">
+ </div>
+<div id="TestResult"  style="text-align:center; " "> </div>
+<div id="unitTest" >
+ </div>
+ <p> Object Properties </p>
+ <div id="ObjectProp" >
+ </div>
+ <script type='text/javascript'>
+ /**************************DOCUMENT READY  *****************************************************************/
+  function iterateO(obj) {
+    for (var property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            if (typeof obj[property] == "object")
+                iterateO(obj[property]);
+            else
+                console.log(property + "   " + obj[property]);
+				$("#ObjectProp").append("<p>" + property + "   " + obj[property] +"</p>");
+        }
+    }
+  }
+  function noCueProperties(acue) {
+  var  exproperty  = new Object();
+  exproperty.cueName = "cuName";
+    for (var property in acue) {
+	 alert ("with :" + property);
+        // if (exproperty.hasOwnProperty(property)) {
+            if  (property in  exproperty){ alert ("property   in cue :" + property) ;   }
+                
+   // }
+  } }
+  $(document).ready(function() {
+ var W = new WWW("noJones");
+ 
+ 
+ 
+ 
+W.CollectWord("hello","first greetings"); 
+ 
+//test case 4
+W.CollectWord("morning" ); 
+ 
+//test case 5placeCue
+W.noJones.placeCue("hello" ); 
+
+ 
+alert ("no jone   alert "  + W.noJones.cuepath   );
+alert ("no jone 2 alert "  + W.noJones.hello.cuepath );
+ 
+
+//test case ends */
+// iterateO(noJones);
+// 
+} );
+</script>
+
+ 
+ 
+
+</body>
+
+</html>

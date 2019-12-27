@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+ 
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+	<script   src="dwisV0$.1.js"> </script>
+	<style>
+	
+	.dot {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 50px;
+		height: 50px;
+		/*margin: -25px 0 0 -25px;*/
+		border-radius: 50px;
+		background-color: #FFF;
+		border: 2px solid #222;
+		z-index: 1;
+	}
+
+	</style>
+<body>
+<span><span id="first">volvo</span><span id="second">tyre</span><span id="third">spring</span> </span>
+<select>
+  <option value="volvo.tyre.spring">Volvo</option> 
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+  <script>
+  $("#first").click(function() { alert ("hit first" + $("#first").html() ) ; } )
+  </script>
+
+<div class="demo-area">
+		<div id="Dot" class="dot"></div>
+
+
+
+
+<script src="impetus.min.js"></script>
+	<script>
+	var dotEl = document.getElementById('Dot');
+	var dotParent = dotEl.offsetParent;
+	
+	var dotImpetus = new Impetus({
+		source: dotEl,
+		initialValues: [dotParent.offsetWidth/2 - 25, 45],
+		boundX: [0, dotParent.offsetWidth - dotEl.offsetWidth],
+		//boundY: [0, dotParent.offsetHeight - dotEl.offsetHeight],
+		update: function(x, y) {
+			this.style.left = x + 'px';
+			this.style.top = y + 'px';
+		}
+	});
+	
+	new Impetus({
+		source: '#Cube',
+		multiplier: 0.7,
+		update: function(x, y) {
+			this.style.transform = this.style.webkitTransform = 'translateZ(-120px) rotateY('+x+'deg) rotateX('+(-y)+'deg)';
+		}
+	});
+	</script>
+	</body>
+</html>

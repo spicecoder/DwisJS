@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+ 
+<head>
+
+  <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+	<script   src="wwwCuelibSit.js"> </script>
+  <style type="text/css">
+  
+  .goodresult {background:#0000ff }
+  .badresult { background: #fef4cf;width: 180px;  }
+
+	
+  </style>
+ <style type="text/css">
+/**
+ * This is a CSS stylesheet that defines three style rules that we use
+ * in the body of the document to create a "window" visual effect.
+ * The rules use positioning properties to set the overall size of the window
+ * and the position of its components. Changing the size of the window
+ * requires careful changes to positioning properties in all three rules.
+ **/
+
+div.window {  /* Specifies size and border of the window */
+    position: relative;         /* The position is specified elsewhere */
+	width: 90%; height: 250px;/* Window size, not including borders */
+    border: 5px outset gray;    /* Note 3D "outset" border effect */
+}
+
+div.band {  /* Specifies size and border of the window */
+    position: relative;         /* The position is specified elsewhere */
+	width: 90%; height: 2px;/* Window size, not including borders */
+    border: 3px outset gray;    /* Note 3D "outset" border effect */
+	background-color: #caa; 
+}
+div.titlebar {  /* Specifies position, size, and style of the titlebar */
+    position: relative;         /* It's a positioned element */
+    top: 0px; height: 15px;     /* Titlebar is 18px + padding and borders */
+    width: 90%;               /* 290 + 5px padding on left and right = 300 */
+    background-color: #aaa;     /* Titlebar color */
+    border-bottom: groove gray 2px;  /* Titlebar has border on bottom only */
+    padding: 3px 3px 2px 3px;   /* Values clockwise: top, right, bottom, left */
+    font: bold 11pt sans-serif; /* Title font */
+}
+
+div.content {  /* Specifies size, position and scrolling for window content */
+    position: relative;         /* It's a positioned element */
+                       /* 18px title+2px border+3px+2px padding */
+    height:200px;              /* 200px total - 25px titlebar - 10px padding*/
+    width: 90%;               /* 300px width - 10px of padding */
+    padding: 3px 3px 2px 3px;                /* Allow space on all four sides */
+    overflow: scroll; 	/* Give us scrollbars if we need them */
+    
+   background-color: #fff;     /* White background by default */
+}
+
+div.translucent { /* this class makes a window partially transparent */
+    opacity: .75;               /* Standard style for transparency */
+    filter: alpha(opacity=75);  /* Transparency for IE */
+}
+</style>
+</head> 
+  
+
+</head>
+<body style="font-size:100%;">
+ 
+<div id ="fortable">
+<h3> Words In My Dictionary </h3>
+
+<div class="window" style="   z-index: 10;">
+<div class="titlebar">Point Window</div>
+<div class="content"style="background-color: #999966"  >
+<textarea style="width: 90%; height: 65px;"   id="myWords"  > Comma Seperated W o r d s </textarea></span> 
+ 
+<button onclick="addDict();"> ADD Words To Dictionary </button>
+ 
+ 
+</div>
+</div>
+ 
+<div class="band" style="   z-index: 10;" >... </div>
+<div class="window" style=" z-index: 10; ">
+<div class="titlebar">Group Window</div>
+<div class="content" style="background-color: #CCCC00">
+<h3> Put Words In A Cue </h3>
+<p>Select Word As A Que </p>
+<select id="wordascue">
+</select>
+<p>Select Word  for the Cue: </p>
+<select id="cueword">
+    
+</select>
+
+<button onclick="putinCue();"> Put Word in Cue </button>
+
+</div>
+</div>
+ <div class="band" style="   z-index: 10;" >... </div>
+<div class="window" style=" z-index: 10;">
+<div class="titlebar">Order Window</div>
+<div class="content"style="background-color: #99CC00"  >
+ <p>Select  Que </p>
+ 
+  <select id="cuesel">
+    
+</select>
+ 
+ 
+ <button onclick="listCue();"> Elements In   Selected Cue,alphabetical </button>  
+ 
+ <div id ="resw"> Result, List of Elements </div>
+</div>
+</div>
+
+ <div class="window" style=" z-index: 10;">
+<div class="titlebar">Scope Scene Window</div>
+<div class="content"style="background-color: #CC9900" >
+1
+ <button onclick="scopeCue();"> Narrowing The scope </button> 
+ <div id ="resf"> Scope Flow </div>
+ </div>
+</div>
+
+ <div class="window" style=" z-index: 10;">
+<div class="titlebar">Flow Scene Window</div>
+<div class="content" style="background-color: #FF9900" >
+<button onclick="flowCue();"> Flow with  Selected Cue </button>  
+ <div id ="resf"> Result Flow </div>
+</div>
+</div>
+
+ </div>
+ 
+
+ <script type='text/javascript'>
+ /**************************DOCUMENT READY  *****************************************************************/
+ function adjustContainer() {  
+ // Here get your viewport values - let's say  
+ // it determines the viewport is 800px, store it  
+ // in var "wwidth"  
+ var wwidth= $(window).width();
+var viewportHeight = $(window).height();
+ //alert ( "adjustl" + wwidth);
+ width=500; 
+ if (wwidth > 0) { 
+
+  if (wwidth  < 500 ) { 
+ // alert ( "width small");
+  width=240;
+  width += 'px'; 
+  document.getElementById('fortable').style.width=width; 
+ //  document.getElementById('fortable').style.height='600px';  
+ }  
+ else if (wwidth > 500 && wwidth <700 ) { 
+ // alert ( "width large");
+  width=500;
+  width += 'px'; 
+  document.getElementById('fortable').style.width=width;  
+  // document.getElementById('fortable').style.height='600px'; 
+   
+}  
+else   { 
+ // alert ( "width large");
+  width=700;
+  width += 'px'; 
+  document.getElementById('fortable').style.width=width;  
+  // document.getElementById('fortable').style.height='600px'; 
+   
+}  
+}
+}
+ var selectaword = "";
+  var selectacue = "";
+  var W =".";
+ function addDict() { 
+ if (W === '.' )
+ { W = new WWW(); }
+ //get words ,comma sperated into array; add each to dictionary
+ var txtv = $('#myWords').val() ;
+ var temp = new Array();
+ temp = txtv.split(",");
+ alert ("here" + temp[0] + ":"+ temp.length);
+ for (var jj = 0 ; jj < temp.length ; jj ++ ) {  
+ W.placeCue(temp[jj])  ; 
+  selectacue = selectacue + '<option value="'+'root.'+temp[jj]+'">'+'root.'+temp[jj]+'</option>';
+  selectaword = selectaword + '<option value="'+temp[jj]+'">'+temp[jj]+'</option>';
+ //var jsonString =JSON.stringify(W);
+ //alert(JSON.stringify(W));
+
+ }
+ //alert (W.metaWords.words);
+ $("#wordascue").append(selectacue);
+ $("#cuesel").append(selectacue);
+ $("#cueword").append(selectaword);
+ $("#wrdsel").append(selectaword);
+ } 
+ function putinCue() {
+var selc = $("#wordascue option:selected").text();
+var selw = $("#cueword option:selected").text();
+var rr = W.placeCue(selw,selc);
+var aw = selc +"." +  selw;
+if (rr == 0) {  
+console.log("return placecue" + rr);
+var sela =  '<option value="'+aw +'">'+aw+'</option>';
+$("#wordascue").append(sela);
+ $("#cuesel").append(sela);
+ }
+ 
+ }
+ function listCue() { 
+ //scope flow== design flow
+ var cuex = $("#cuesel option:selected").text();
+ var bdv = W.listCue(cuex);
+ alert("div w;" + bdv);
+ //W.scopeCue(cuex);
+ $("#resw").html(bdv);
+ 
+ }
+ function flowCue() { 
+ //scope flow== design flow
+ var cuex = $("#cuesel option:selected").text();
+ var bdf = W.flowCue(cuex);
+ alert("div f;" + bdf);
+ //W.scopeCue(cuex);
+ $("#resf").html(bdf);
+ 
+ }
+ function scopeCue() { 
+ //scope flow== design flow
+ var cuex = $("#cuesel option:selected").text();
+ var bds = W.scopeCue(cuex);b
+ alert("div f;" + bds);
+ //W.scopeCue(cuex);
+ $("#ress").html(bds);
+ 
+ }
+ // node flow== exeution flow
+  function iterateO(obj) {
+    for (var property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            if (typeof obj[property] == "object")
+                iterateO(obj[property]);
+            else
+                console.log(property + "   " + obj[property]);
+				$("#ObjectProp").append("<p>" + property + "   " + obj[property] +"</p>");
+        }
+    }
+  }
+  function noCueProperties(acue) {
+  var  exproperty  = new Object();
+  exproperty.cueName = "cuName";
+    for (var property in acue) {
+	 alert ("with :" + property);
+        // if (exproperty.hasOwnProperty(property)) {
+            if  (property in  exproperty){ alert ("property   in cue :" + property) ;   }
+                
+   // }
+  } }
+  $(document).ready(function() {adjustContainer();
+  
+ 
+$(window).resize(function() {
+adjustContainer();
+})
+
+} );
+</script>
+
+ 
+ 
+
+</body>
+
+</html>
